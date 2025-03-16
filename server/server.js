@@ -5,7 +5,7 @@ const { exec } = require("child_process");
 const axios = require("axios");
 
 const app = express();
-app.use(cors());
+app.use(cors({ origin: "*" }));
 app.use(express.json());
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;

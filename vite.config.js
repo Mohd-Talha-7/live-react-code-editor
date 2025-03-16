@@ -7,6 +7,7 @@ export default defineConfig({
     port: process.env.PORT || 5173,
     host: "0.0.0.0",
     strictPort: true,
-    allowedHosts: ["live-react-code-editor.onrender.com"], // Render host allow
+    allowedHosts: ["*"], // Sabhi hosts allow karne ke liye
+    cors: true, // Cross-Origin Requests allow
   },
 });
