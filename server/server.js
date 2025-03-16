@@ -5,7 +5,11 @@ const { exec } = require("child_process");
 const axios = require("axios");
 
 const app = express();
-app.use(cors({ origin: "*" }));
+app.use(cors({
+  origin: ["https://live-react-code-editor.onrender.com"], // ✅ Sirf apni domain allow karo
+  methods: ["GET", "POST"],
+  credentials: true,
+}));
 app.use(express.json());
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;

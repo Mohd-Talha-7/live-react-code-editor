@@ -6,10 +6,9 @@ export default defineConfig({
   server: {
     port: process.env.PORT || 5173,
     host: "0.0.0.0",
-    strictPort: true, // Ensure it uses the exact port
-    allowedHosts: ["live-react-code-editor.onrender.com"], // 🛠️ Yeh line add karo
+    strictPort: true,
   },
   preview: {
-    allowedHosts: ["live-react-code-editor.onrender.com"], // ✅ Yeh bhi add karo
+    allowedHosts: ["live-react-code-editor.onrender.com"], // ✅ Yeh line sahi hai
   },
 });

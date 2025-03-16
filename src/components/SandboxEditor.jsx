@@ -25,10 +25,10 @@ const SandboxEditor = ({ code }) => {
       "https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.development.min.js",
       "https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.development.min.js",
     ],
-    timeout: 10000, // Timeout ko 10s tak badhao
+    timeout: 15000, // Timeout ko 10s tak badhao
   }}
   files={{
-    "/App.js": {
+    "/App.jsx": {
       code: code,
       active: true,
     },
