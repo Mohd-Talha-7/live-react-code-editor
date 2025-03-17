@@ -12,7 +12,8 @@ const AIButton = ({ setCode }) => {
 
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:5000/generate-code", {
+      const BASE_URL = window.location.origin; // ✅ Render pe frontend aur backend ek hi domain pe hain
+      const response = await fetch(`${BASE_URL}/generate-code`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
