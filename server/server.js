@@ -12,6 +12,12 @@ app.use(cors({
 }));
 app.use(express.json());
 
+app.use(express.static(path.join(__dirname, "../dist"))); // ✅ React build folder serve karega
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../dist", "index.html"));
+});
+
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 
 if (!GEMINI_API_KEY) {
