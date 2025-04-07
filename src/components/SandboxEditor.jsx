@@ -14,7 +14,7 @@ const SandboxEditor = ({ code }) => {
           showPreview: true,
         }}
         files={{
-          "/App.jsx": {
+          "/App.js": {
             code: code,
             active: true,
           },
@@ -27,20 +27,6 @@ import App from "./App";
 const root = createRoot(document.getElementById("root"));
 root.render(<App />);
           `,
-          },
-          "/index.html": {
-            code: `
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>React App</title>
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
-</html>
-            `,
           },
         }}
       />
