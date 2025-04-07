@@ -1,8 +1,33 @@
 import React, { useState } from "react";
 
+const sanitizeCode = (rawCode) => {
+  let code = rawCode.replace(/```(jsx|javascript)?/g, "").trim();
+
+  const usesReact = code.includes("useState") || code.includes("useEffect") || code.includes("useRef");
+
+  if (!code.includes("import React")) {
+    if (usesReact) {
+      code = `import React, { useState, useEffect, useRef } from "react";\n\n${code}`;
+    } else {
+      code = `import React from "react";\n\n${code}`;
+    }
+  }
+
+  if (!code.includes("export default")) {
+    const match = code.match(/function\s+([A-Z][A-Za-z0-9]*)/);
+    if (match && match[1]) {
+      code += `\n\nexport default ${match[1]};`;
+    } else {
+      code += `\n\nexport default App;`;
+    }
+  }
+
+  return code;
+};
+
 const AIButton = ({ setCode }) => {
   const [loading, setLoading] = useState(false);
-  const [customPrompt, setCustomPrompt] = useState(""); // ✅ User ke prompt ke liye state
+  const [customPrompt, setCustomPrompt] = useState("");
 
   const fetchAISuggestion = async () => {
     if (!customPrompt.trim()) {
@@ -12,19 +37,19 @@ const AIButton = ({ setCode }) => {
 
     setLoading(true);
     try {
-      const BASE_URL = window.location.origin; // ✅ Render pe frontend aur backend ek hi domain pe hain
+      const BASE_URL = window.location.origin;
       const response = await fetch(`${BASE_URL}/generate-code`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          prompt: `${customPrompt}. Only provide valid React component code. No explanations, no markdown syntax. Unique ID: ${Date.now()}`
+          prompt: `${customPrompt}. Only provide valid React component code. No explanations, no markdown syntax. Unique ID: ${Date.now()}`,
         }),
       });
 
       const data = await response.json();
       console.log("✅ AI Response:", data);
       if (data.suggestion) {
-        let cleanCode = data.suggestion.replace(/```jsx|```javascript|```/g, "").trim();
+        const cleanCode = sanitizeCode(data.suggestion);
         setCode(cleanCode);
       }
     } catch (error) {
