@@ -7,21 +7,11 @@ const SandboxEditor = ({ code }) => {
       <h2>Live React Code Editor</h2>
       <Sandpack
         template="react"
-        theme="light"
-        customSetup={{
-          dependencies: {
-            "@mui/material": "latest",
-            "@emotion/react": "latest",
-            "@emotion/styled": "latest",
-            "@mui/icons-material": "latest",
-          },
-        }}
         options={{
           showLineNumbers: true,
           editorHeight: 400,
           showConsole: true,
           showPreview: true,
-          timeout: 15000,
         }}
         files={{
           "/App.jsx": {
@@ -36,6 +26,20 @@ import App from "./App";
 
 const root = createRoot(document.getElementById("root"));
 root.render(<App />);
+          `,
+          },
+          "/index.html": {
+            code: `
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>React App</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
             `,
           },
         }}
